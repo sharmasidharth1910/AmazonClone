@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
+const bcryptjs = require('bcryptjs');
 
 const authRouter = express.Router();
 
@@ -9,6 +10,7 @@ const authRouter = express.Router();
 //     });
 // });
 
+//SIGN UP ROUTE
 authRouter.post('/api/signup', async (req, res) => {
 
     try {
@@ -30,10 +32,12 @@ authRouter.post('/api/signup', async (req, res) => {
             });
         }
 
+        const hashedPassword = await bcryptjs.hash(password, 8);
+
         let user = new User({
             email,
-            password,
-            name
+            password: hashedPassword,
+            name,
         });
 
         //Post the data to the user
@@ -42,7 +46,9 @@ authRouter.post('/api/signup', async (req, res) => {
         res.json(user);
 
     } catch (e) {
-        res.status(500).json({error: e.message});
+        res.status(500).json({
+            error: e.message
+        });
     }
 });
 
