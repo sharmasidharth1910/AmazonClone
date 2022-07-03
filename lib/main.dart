@@ -1,7 +1,6 @@
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/router.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: AuthScreen(),
+      home: const AuthScreen(),
     );
   }
 }
